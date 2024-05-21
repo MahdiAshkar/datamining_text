@@ -1,12 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import pymongo
-import datetime
 base_url = 'https://www.tabnak.ir/fa/news/'
-politics = 'politics'
-economic = 'economic'
-cultural = 'cultural'
-social = 'social'
 myClient = pymongo.MongoClient("mongodb://localhost:27017")
 database = myClient['tabnak']
 
@@ -39,12 +34,6 @@ def crawler_news_tabnak():
 def insert_one_mongodb(my_dict, name_collection):
     my_collection = database[name_collection]
     my_collection.insert_one(my_dict)
-
-
-def get_date_mongodb(name_collection):
-    my_collection = database[name_collection]
-    document = my_collection.find_one()
-    return document
 
 
 if __name__ == "__main__":
